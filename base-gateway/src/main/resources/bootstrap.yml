@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: base-gateway
+  profiles:
+    active: local
+---
+# dataId 格式：${prefix}-${spring.profile.active}.${file-extension}
+spring:
+  profiles: local
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8858
+      config:
+        server-addr: localhost:8858
+        group: DEFAULT_GROUP
+        file-extension: yml

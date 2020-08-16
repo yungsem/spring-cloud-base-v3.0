@@ -1,11 +1,8 @@
-package com.yungsem.baserbacbiz.service;
+package com.yungsem.baserbacbiz.service.common;
 
-import com.yungsem.basebusinessapi.feign.RemoteBusinessService;
 import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 
 /**
  * @author yangsen
@@ -15,12 +12,8 @@ import javax.annotation.Resource;
 @Service
 @Slf4j
 public class UserService {
-    @Resource
-    private RemoteBusinessService remoteBusinessService;
 
     public UserEntity getByUsername(String username) {
-        String hello = remoteBusinessService.testFeign("hello");
-        log.info("=====>>>{}", hello);
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername("admin");
         userEntity.setRealName("管理员");

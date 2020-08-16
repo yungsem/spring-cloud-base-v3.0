@@ -11,6 +11,6 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class BusinessEntity extends BaseEntity {
-    private String biz;
+public class BomEntity extends BaseEntity {
+    private String materialCode;
 }

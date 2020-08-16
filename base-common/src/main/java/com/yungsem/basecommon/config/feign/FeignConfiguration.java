@@ -1,8 +1,7 @@
-package com.yungsem.basecommon.config;
+package com.yungsem.basecommon.config.feign;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
  * @version 1.0
  * @since 2020-08-16
  */
-@Configuration
 public class FeignConfiguration implements RequestInterceptor {
 
     /**

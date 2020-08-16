@@ -1,7 +1,7 @@
-package com.yungsem.baserbacbiz.controller;
+package com.yungsem.baserbacbiz.controller.remote;
 
-import com.yungsem.baserbacbiz.service.UserService;
 import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
+import com.yungsem.baserbacbiz.service.remote.RemoteUserService;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,20 +15,13 @@ import javax.annotation.Resource;
  */
 @RefreshScope
 @RestController
-@RequestMapping("/rbac")
-public class UserController {
-    // @Value("${server-name}")
-    // private String serverName;
+@RequestMapping("/rbac/remote")
+public class RemoteUserController {
     @Resource
-    private UserService userService;
-
-    // @GetMapping("/user/config/serverName")
-    // public String getConfig() {
-    //     return serverName;
-    // }
+    private RemoteUserService remoteUserService;
 
     @GetMapping("/user/getByUsername")
-    public UserEntity getByUsername(@RequestParam(value = "username") String username) {
-        return userService.getByUsername(username);
+    public UserEntity getUserByUsername(@RequestParam(value = "username") String username) {
+        return remoteUserService.getUserByUsername(username);
     }
 }

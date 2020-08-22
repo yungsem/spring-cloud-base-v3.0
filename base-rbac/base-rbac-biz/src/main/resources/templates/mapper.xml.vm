@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${package.Mapper}.${table.mapperName}">
+#if(${baseColumnList})
+    <sql id="baseColumn">
+        #foreach($field in ${table.commonFields})
+        ${field.name},
+        #end
+        ${table.fieldNames}
+    </sql>
+#end
+
+    <delete id="deleteById" parameterType="long">
+        delete from ${table.name} where id = #{id}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.util.List">
+        delete from ${table.name} where id in
+        <foreach collection="idList" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id ="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into ${table.name}
+        (
+            #foreach($field in ${table.commonFields})
+            #if(!${field.keyFlag})
+            ${field.name},
+            #end
+            #end
+            ${table.fieldNames}
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+                #foreach($field in ${table.commonFields})
+                #if(!${field.keyFlag})
+                #{item.${field.propertyName}},
+                #end
+                #end
+                #foreach($field in ${table.fields})
+                #if(!${field.keyFlag})
+                #{item.${field.propertyName}}#if($foreach.hasNext),#end
+                #end
+                #end
+            )
+        </foreach>
+    </insert>
+</mapper>

@@ -2,6 +2,7 @@ package com.yungsem.basecommon.pojo.entity.common;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,9 @@ import java.util.Date;
  * @since 2020-08-16
  */
 @Data
-public class BaseEntity {
+public class BaseEntity implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private Long id;
     private String code;
     private Date createTime;

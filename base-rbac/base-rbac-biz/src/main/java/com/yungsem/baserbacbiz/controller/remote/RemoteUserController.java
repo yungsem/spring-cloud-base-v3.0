@@ -22,6 +22,6 @@ public class RemoteUserController {
 
     @GetMapping("/user/getByUsername")
     public UserEntity getUserByUsername(@RequestParam(value = "username") String username) {
-        return remoteUserService.getUserByUsername(username);
+        return null;//remoteUserService.getUserByUsername(username);
     }
 }

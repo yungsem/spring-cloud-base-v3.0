@@ -1,0 +1,53 @@
+package ${package.Service};
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import ${package.Entity}.${entity};
+
+import java.util.List;
+
+/**
+ * $!{table.comment}
+ *
+ * @author $!{author}
+ * @version 1.0
+ * @since $!{date}
+ */
+public interface ${table.serviceName} extends IService<${entity}> {
+
+    /**
+     * 获取
+     *
+     * @param xx xx
+     * @return $!{entity}
+     */
+    $!{entity} getByXX(String xx);
+
+    /**
+     * 获取
+     *
+     * @param xxx xxx
+     * @return List<$!{entity}>
+     */
+    List<$!{entity}> getByXXX(String xxx);
+
+    /**
+     * 批量插入
+     *
+     * @param $!{table.entityPath}List $!{table.comment}
+     */
+    void insertBatch(List<$!{entity}> $!{table.entityPath}List);
+
+    /**
+     * 删除，物理删除
+     *
+     * @param id ID 主键
+     */
+    void deleteById(Long id);
+
+    /**
+     * 批量删除，物理删除
+     *
+     * @param idList ID 主键 List
+     */
+    void deleteByIds(List<Long> idList);
+}

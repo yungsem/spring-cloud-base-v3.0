@@ -1,26 +1,29 @@
-package com.yungsem.baserbacbiz.mapper.common;
+package ${package.Mapper};
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
 import org.apache.ibatis.annotations.Param;
+import ${package.Entity}.${entity};
 
 import java.util.List;
 
 /**
- * 用户
+ * $!{table.comment}
  *
- * @author yangsen
+ * @author $!{author}
  * @version 1.0
- * @since 2020-08-21
+ * @since $!{date}
  */
-public interface UserMapper extends BaseMapper<UserEntity> {
+#if(${kotlin})
+interface ${table.mapperName} : ${superMapperClass}<${entity}>
+#else
+public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
 
     /**
      * 批量插入
      *
-     * @param userEntityList 用户
+     * @param $!{table.entityPath}List $!{table.comment}
      */
-    void insertBatch(List<UserEntity> userEntityList);
+    void insertBatch(List<$!{entity}> $!{table.entityPath}List);
 
     /**
      * 删除，物理删除
@@ -36,3 +39,4 @@ public interface UserMapper extends BaseMapper<UserEntity> {
      */
     void deleteByIds(@Param("idList") List<Long> idList);
 }
+#end

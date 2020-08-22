@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yungsem.baserbacbiz.mapper.common.UserMapper">
+    <sql id="baseColumn">
+        id,
+        create_time,
+        create_user_code,
+        create_user_name,
+        update_time,
+        update_user_code,
+        update_user_name,
+        username, password, real_name, is_del
+    </sql>
+
+    <delete id="deleteById" parameterType="long">
+        delete from rbac_user where id = #{id}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.util.List">
+        delete from rbac_user where id in
+        <foreach collection="idList" item="item" index="index" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id ="insertBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        insert into rbac_user
+        (
+            create_time,
+            create_user_code,
+            create_user_name,
+            update_time,
+            update_user_code,
+            update_user_name,
+            username, password, real_name, is_del
+        )
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+                #{item.createTime},
+                #{item.createUserCode},
+                #{item.createUserName},
+                #{item.updateTime},
+                #{item.updateUserCode},
+                #{item.updateUserName},
+                #{item.username},
+                #{item.password},
+                #{item.realName},
+                #{item.isDel}
+            )
+        </foreach>
+    </insert>
+</mapper>

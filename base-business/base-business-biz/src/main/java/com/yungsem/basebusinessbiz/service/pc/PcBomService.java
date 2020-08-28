@@ -1,5 +1,6 @@
 package com.yungsem.basebusinessbiz.service.pc;
 
+import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
 import com.yungsem.baserbacapi.feign.RemoteUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

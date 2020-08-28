@@ -4,6 +4,7 @@ import com.yungsem.basebusinessapi.feign.RemoteBomService;
 import com.yungsem.basebusinessapi.feign.RemoteNoTokenService;
 import com.yungsem.basecommon.pojo.entity.business.BomEntity;
 import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
+import com.yungsem.basecommon.util.UserUtil;
 import com.yungsem.baserbacbiz.service.common.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,8 @@ public class PcUserService {
     }
 
     public UserEntity getByUsername(String username) {
+        UserEntity loginUser = UserUtil.getLoginUser();
+        log.info("=====>>>当前登录用户：{}", loginUser.toString());
         return userService.getByUsername(username);
     }
 }

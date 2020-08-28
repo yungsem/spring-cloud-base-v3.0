@@ -2,8 +2,10 @@ package com.yungsem.baseauth.config;
 
 import com.yungsem.baseauth.service.BaseClientDetailsService;
 import com.yungsem.baseauth.service.BaseRedisTokenStore;
+import com.yungsem.baseauth.service.BaseTokenEnhancer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +14,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
 import javax.annotation.Resource;
@@ -52,8 +57,9 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
                 .authenticationManager(authenticationManager)
-                .userDetailsService(userDetailsService) // 配置获取用户信息的 userDetailsService ，密码模式使用
                 .tokenStore(tokenStore()) // 使用 redis 存储 token
+                .tokenEnhancer(tokenEnhancer()) // 增强 token 内容
+                .userDetailsService(userDetailsService) // 配置获取用户信息的 userDetailsService ，密码模式使用
                 .reuseRefreshTokens(true) // 刷新 token 时，是否保持 refresh_token 不变
         ;
     }
@@ -73,5 +79,19 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         BaseRedisTokenStore tokenStore = new BaseRedisTokenStore(redisConnectionFactory);
         tokenStore.setPrefix("base_token:");
         return tokenStore;
+    }
+
+    @Bean
+    @Primary
+    public AuthorizationServerTokenServices tokenServices() {
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setTokenEnhancer(tokenEnhancer());
+        tokenServices.setTokenStore(tokenStore());
+        return tokenServices;
+    }
+
+    @Bean
+    public TokenEnhancer tokenEnhancer() {
+        return new BaseTokenEnhancer();
     }
 }

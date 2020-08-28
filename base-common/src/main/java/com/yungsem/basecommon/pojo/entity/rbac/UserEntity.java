@@ -14,8 +14,8 @@ import lombok.EqualsAndHashCode;
  * @version 1.0
  * @since 2020-08-21
  */
-@Data
 @EqualsAndHashCode(callSuper = true)
+@Data
 @TableName("rbac_user")
 @ApiModel(value = "用户", description = "用户")
 public class UserEntity extends BaseEntity {
@@ -26,6 +26,4 @@ public class UserEntity extends BaseEntity {
     private String password;
     @ApiModelProperty(value = "用户姓名", example = "用户姓名")
     private String realName;
-    @ApiModelProperty(value = "是否删除", example = "是否删除")
-    private Integer isDel;
 }

@@ -23,11 +23,6 @@
             <groupId>com.yungsem</groupId>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <artifactId>base-common</artifactId>
-            <groupId>com.yungsem</groupId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 
     <build>

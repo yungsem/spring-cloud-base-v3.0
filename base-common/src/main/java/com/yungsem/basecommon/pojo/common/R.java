@@ -21,6 +21,10 @@ public class R<T> {
         return build(CODE_OK, MESSAGE_OK, data);
     }
 
+    public static <T> R<T> ok() {
+        return build(CODE_OK, MESSAGE_OK, null);
+    }
+
     public static <T> R<T> failed(String message) {
         return build(CODE_FAIL, message, null);
     }

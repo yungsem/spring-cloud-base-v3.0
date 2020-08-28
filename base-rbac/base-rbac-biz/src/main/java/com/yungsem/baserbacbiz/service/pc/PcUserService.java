@@ -1,12 +1,11 @@
 package com.yungsem.baserbacbiz.service.pc;
 
-import com.yungsem.basebusinessapi.feign.RemoteBomService;
-import com.yungsem.basebusinessapi.feign.RemoteNoTokenService;
-import com.yungsem.basecommon.pojo.entity.business.BomEntity;
+import cn.hutool.core.bean.BeanUtil;
 import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
-import com.yungsem.basecommon.util.UserUtil;
+import com.yungsem.basecommon.pojo.param.rbac.UserAddParam;
 import com.yungsem.baserbacbiz.service.common.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,25 +21,14 @@ import javax.annotation.Resource;
 @Service
 public class PcUserService {
     @Resource
-    private RemoteBomService remoteBomService;
-    @Resource
-    private RemoteNoTokenService remoteNoTokenService;
-    @Resource
     private UserService userService;
+    @Resource
+    private BCryptPasswordEncoder passwordEncoder;
 
-    public String doBusiness() {
-        BomEntity bomEntity = remoteBomService.getByMaterialCode("010001");
-        log.info("=====>>>{}", bomEntity);
-        return "用户模块 PC 端业务";
-    }
-
-    public String testNoToken() {
-        return remoteNoTokenService.testNoToken();
-    }
-
-    public UserEntity getByUsername(String username) {
-        UserEntity loginUser = UserUtil.getLoginUser();
-        log.info("=====>>>当前登录用户：{}", loginUser.toString());
-        return userService.getByUsername(username);
+    public void addUser(UserAddParam param) {
+        UserEntity entity = new UserEntity();
+        BeanUtil.copyProperties(param, entity);
+        // entity.setPassword(passwordEncoder.encode("123456"));
+        userService.save(entity);
     }
 }

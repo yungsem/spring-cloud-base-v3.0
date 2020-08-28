@@ -28,6 +28,7 @@ public class UserUtil {
             return userEntity;
         } else {
             UserEntity userEntity = new UserEntity();
+            userEntity.setCode("anonymous");
             userEntity.setUsername("anonymous");
             userEntity.setRealName("匿名");
             return userEntity;

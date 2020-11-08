@@ -1,4 +1,4 @@
-package com.yungsem.baserbacbiz.config.authignore;
+package com.yungsem.basecommon.config.authignore;
 
 import cn.hutool.core.util.ReUtil;
 import com.yungsem.basecommon.config.annotation.AuthIgnore;

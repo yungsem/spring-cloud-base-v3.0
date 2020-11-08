@@ -1,4 +1,4 @@
-package com.yungsem.baserbacbiz.config.feign;
+package com.yungsem.basecommon.config.feign;
 
 import com.netflix.hystrix.HystrixThreadPoolKey;
 import com.netflix.hystrix.HystrixThreadPoolProperties;

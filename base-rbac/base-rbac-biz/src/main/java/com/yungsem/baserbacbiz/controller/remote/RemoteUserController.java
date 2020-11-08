@@ -1,6 +1,5 @@
 package com.yungsem.baserbacbiz.controller.remote;
 
-import com.yungsem.basecommon.config.annotation.AuthIgnore;
 import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
 import com.yungsem.baserbacbiz.service.remote.RemoteUserService;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -21,7 +20,7 @@ public class RemoteUserController {
     @Resource
     private RemoteUserService remoteUserService;
 
-    @AuthIgnore
+    // @AuthIgnore
     @GetMapping("/user/getByUsername")
     public UserEntity getUserByUsername(@RequestParam(value = "username") String username) {
         return remoteUserService.getUserByUsername(username);

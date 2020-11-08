@@ -1,10 +1,10 @@
 package com.yungsem.basecommon.util;
 
-import cn.hutool.core.bean.BeanUtil;
-import com.yungsem.basecommon.pojo.entity.auth.AuthUser;
 import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+
+import java.util.Map;
 
 /**
  * @author yangsen
@@ -21,10 +21,13 @@ public class UserUtil {
     public static UserEntity getLoginUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
-        if (principal instanceof AuthUser) {
-            AuthUser authUser = (AuthUser) principal;
+        if (principal instanceof Map) {
+            Map<?, ?> map = (Map<?, ?>) principal;
             UserEntity userEntity = new UserEntity();
-            BeanUtil.copyProperties(authUser, userEntity);
+            userEntity.setUsername((String)map.get("username"));
+            userEntity.setRealName((String)map.get("realName"));
+            userEntity.setId(Long.valueOf((Integer)map.get("id")));
+            userEntity.setCode((String)map.get("code"));
             return userEntity;
         } else {
             UserEntity userEntity = new UserEntity();

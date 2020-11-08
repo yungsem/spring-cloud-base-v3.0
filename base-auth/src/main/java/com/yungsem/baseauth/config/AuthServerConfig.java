@@ -3,6 +3,7 @@ package com.yungsem.baseauth.config;
 import com.yungsem.baseauth.service.BaseClientDetailsService;
 import com.yungsem.baseauth.service.BaseRedisTokenStore;
 import com.yungsem.baseauth.service.BaseTokenEnhancer;
+import com.yungsem.baseauth.service.BaseUserAuthenticationConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -14,10 +15,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenEnhancer;
-import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.*;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
@@ -55,11 +53,16 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        DefaultAccessTokenConverter converter = new DefaultAccessTokenConverter();
+        BaseUserAuthenticationConverter userAuthenticationConverter
+                = new BaseUserAuthenticationConverter();
+        converter.setUserTokenConverter(userAuthenticationConverter);
         endpoints
                 .authenticationManager(authenticationManager)
                 .tokenStore(tokenStore()) // 使用 redis 存储 token
-                .tokenEnhancer(tokenEnhancer()) // 增强 token 内容
+                .accessTokenConverter(converter)
                 .userDetailsService(userDetailsService) // 配置获取用户信息的 userDetailsService ，密码模式使用
+                .tokenEnhancer(tokenEnhancer()) // 增强 token 内容
                 .reuseRefreshTokens(true) // 刷新 token 时，是否保持 refresh_token 不变
         ;
     }

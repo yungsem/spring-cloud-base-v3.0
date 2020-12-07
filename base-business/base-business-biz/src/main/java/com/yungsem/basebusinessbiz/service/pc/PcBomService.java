@@ -1,6 +1,6 @@
 package com.yungsem.basebusinessbiz.service.pc;
 
-import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
+import com.yungsem.basecommon.pojo.entity.rbac.User;
 import com.yungsem.baserbacapi.feign.RemoteUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,8 +21,8 @@ public class PcBomService {
     private RemoteUserService remoteUserService;
 
     public String doBusiness() {
-        UserEntity userEntity = remoteUserService.getByUsername("admin");
-        log.info("=====>>>{}", userEntity);
+        User user = remoteUserService.getByUsername("admin");
+        log.info("=====>>>{}", user);
         return "BOM 模块 PC 端业务";
     }
 }

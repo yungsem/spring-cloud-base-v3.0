@@ -1,4 +1,4 @@
-package com.yungsem.baseauth.service;
+package com.yungsem.baseauth.service.endpointconfig;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter;

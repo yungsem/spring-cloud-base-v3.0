@@ -1,6 +1,6 @@
 package com.yungsem.basecommon.util;
 
-import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
+import com.yungsem.basecommon.pojo.entity.rbac.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -18,23 +18,23 @@ public class UserUtil {
      *
      * @return UserEntity
      */
-    public static UserEntity getLoginUser() {
+    public static User getLoginUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object principal = authentication.getPrincipal();
         if (principal instanceof Map) {
             Map<?, ?> map = (Map<?, ?>) principal;
-            UserEntity userEntity = new UserEntity();
-            userEntity.setUsername((String)map.get("username"));
-            userEntity.setRealName((String)map.get("realName"));
-            userEntity.setId(Long.valueOf((Integer)map.get("id")));
-            userEntity.setCode((String)map.get("code"));
-            return userEntity;
+            User user = new User();
+            user.setUsername((String)map.get("username"));
+            user.setRealName((String)map.get("realName"));
+            user.setId(Long.valueOf((Integer)map.get("id")));
+            user.setCode((String)map.get("code"));
+            return user;
         } else {
-            UserEntity userEntity = new UserEntity();
-            userEntity.setCode("anonymous");
-            userEntity.setUsername("anonymous");
-            userEntity.setRealName("匿名");
-            return userEntity;
+            User user = new User();
+            user.setCode("anonymous");
+            user.setUsername("anonymous");
+            user.setRealName("匿名");
+            return user;
         }
     }
 }

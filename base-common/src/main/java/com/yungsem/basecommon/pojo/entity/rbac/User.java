@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @TableName("rbac_user")
 @ApiModel(value = "用户", description = "用户")
-public class UserEntity extends BaseEntity {
+public class User extends BaseEntity {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "用户名", example = "用户名")
     private String username;

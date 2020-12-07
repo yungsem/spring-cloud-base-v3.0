@@ -57,7 +57,7 @@ public class ${table.serviceImplName} extends ServiceImpl<${table.mapperName}, $
      * @param $!{table.entityPath}List $!{table.comment}
      */
     public void insertBatch(List<$!{entity}> $!{table.entityPath}List) {
-        this.baseMapper.insertBatch(userEntityList);
+        this.baseMapper.insertBatch(userList);
     }
 
     /**

@@ -1,7 +1,7 @@
 package com.yungsem.baserbacapi.feign;
 
 import com.yungsem.basecommon.config.feign.FeignConfiguration;
-import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
+import com.yungsem.basecommon.pojo.entity.rbac.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,5 +15,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface RemoteUserService {
 
     @GetMapping("/rbac/remote/user/getByUsername")
-    UserEntity getByUsername(@RequestParam(value = "username") String username);
+    User getByUsername(@RequestParam(value = "username") String username);
 }

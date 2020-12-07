@@ -1,6 +1,7 @@
 package com.yungsem.basecommon.pojo.entity.auth;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -11,24 +12,17 @@ import java.util.Collection;
  * @version 1.0
  * @since 2020-08-22
  */
+
 public class AuthUser extends User {
-    @Getter
+    @Getter@Setter
     private Long id;
-    @Getter
+    @Getter@Setter
     private String code;
-    @Getter
+    @Getter@Setter
     private String realName;
 
-    public AuthUser(String username, String password, boolean enabled, boolean accountNonExpired,
-                    boolean credentialsNonExpired, boolean accountNonLocked,
-                    Collection<? extends GrantedAuthority> authorities) {
-        super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
-    }
 
-    public AuthUser(String username, String password, Collection<? extends GrantedAuthority> authorities, Long id, String code, String realName) {
+    public AuthUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
-        this.id = id;
-        this.code = code;
-        this.realName = realName;
     }
 }

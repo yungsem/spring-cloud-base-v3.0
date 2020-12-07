@@ -1,6 +1,6 @@
 package com.yungsem.basebusinessbiz.service.remote;
 
-import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
+import com.yungsem.basecommon.pojo.entity.rbac.User;
 import com.yungsem.basecommon.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RemoteNoTokenService {
 
     public String testNoToken() {
-        UserEntity loginUser = UserUtil.getLoginUser();
+        User loginUser = UserUtil.getLoginUser();
         System.out.println(loginUser.toString());
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = servletRequestAttributes.getRequest();

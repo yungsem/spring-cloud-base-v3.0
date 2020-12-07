@@ -1,7 +1,7 @@
 package com.yungsem.basecommon.config.mybatisplus;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
+import com.yungsem.basecommon.pojo.entity.rbac.User;
 import com.yungsem.basecommon.util.UserUtil;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ public class BaseMetaObjectHandler implements MetaObjectHandler {
 
         Date now = new Date();
 
-        UserEntity loginUser = UserUtil.getLoginUser();
+        User loginUser = UserUtil.getLoginUser();
 
         if (createTime == null) {
             metaObject.setValue("createTime", now);
@@ -47,7 +47,7 @@ public class BaseMetaObjectHandler implements MetaObjectHandler {
 
         Date now = new Date();
 
-        UserEntity loginUser = UserUtil.getLoginUser();
+        User loginUser = UserUtil.getLoginUser();
 
         metaObject.setValue("updateTime", now);
 

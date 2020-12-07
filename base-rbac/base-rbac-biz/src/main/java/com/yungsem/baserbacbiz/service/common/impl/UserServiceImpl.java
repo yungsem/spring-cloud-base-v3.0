@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
+import com.yungsem.basecommon.pojo.entity.rbac.User;
 import com.yungsem.baserbacbiz.mapper.common.UserMapper;
 import com.yungsem.baserbacbiz.service.common.UserService;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2020-08-21
  */
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     /**
      * 获取
@@ -28,10 +28,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
      * @return UserEntity
      */
     @Override
-    public UserEntity getByUsername(String username) {
-        LambdaQueryWrapper<UserEntity> qw = Wrappers.<UserEntity>lambdaQuery()
-        .eq(UserEntity::getUsername, username);
-        List<UserEntity> list = this.list(qw);
+    public User getByUsername(String username) {
+        LambdaQueryWrapper<User> qw = Wrappers.<User>lambdaQuery()
+        .eq(User::getUsername, username);
+        List<User> list = this.list(qw);
         if (CollectionUtil.isNotEmpty(list)) {
             return CollectionUtil.getFirst(list);
         }
@@ -45,19 +45,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserEntity> impleme
      * @return List<UserEntity>
      */
     @Override
-    public List<UserEntity> getByRealName(String realName) {
-        LambdaQueryWrapper<UserEntity> qw = Wrappers.<UserEntity>lambdaQuery()
-        .eq(UserEntity::getRealName, realName);
+    public List<User> getByRealName(String realName) {
+        LambdaQueryWrapper<User> qw = Wrappers.<User>lambdaQuery()
+        .eq(User::getRealName, realName);
         return this.list(qw);
     }
 
     /**
      * 批量插入
      *
-     * @param userEntityList 用户
+     * @param userList 用户
      */
-    public void insertBatch(List<UserEntity> userEntityList) {
-        this.baseMapper.insertBatch(userEntityList);
+    public void insertBatch(List<User> userList) {
+        this.baseMapper.insertBatch(userList);
     }
 
     /**

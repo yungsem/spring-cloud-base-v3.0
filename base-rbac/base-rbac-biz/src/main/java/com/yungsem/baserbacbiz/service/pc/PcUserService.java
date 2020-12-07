@@ -4,7 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.yungsem.basebusinessapi.feign.RemoteBomService;
 import com.yungsem.basebusinessapi.feign.RemoteNoTokenService;
 import com.yungsem.basecommon.pojo.entity.business.BomEntity;
-import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
+import com.yungsem.basecommon.pojo.entity.rbac.User;
 import com.yungsem.basecommon.pojo.param.rbac.UserAddParam;
 import com.yungsem.basecommon.util.UserUtil;
 import com.yungsem.baserbacbiz.service.common.UserService;
@@ -33,11 +33,11 @@ public class PcUserService {
     // private BCryptPasswordEncoder passwordEncoder;
 
     public void addUser(UserAddParam param) {
-        UserEntity loginUser = UserUtil.getLoginUser();
+        User loginUser = UserUtil.getLoginUser();
 
         BomEntity byMaterialCode = remoteBomService.getByMaterialCode("111");
         String s = remoteNoTokenService.testNoToken();
-        UserEntity entity = new UserEntity();
+        User entity = new User();
         BeanUtil.copyProperties(param, entity);
         // entity.setPassword(passwordEncoder.encode("123456"));
         userService.save(entity);

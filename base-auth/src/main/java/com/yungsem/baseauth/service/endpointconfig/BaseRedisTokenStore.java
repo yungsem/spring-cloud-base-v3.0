@@ -1,4 +1,4 @@
-package com.yungsem.baseauth.service;
+package com.yungsem.baseauth.service.endpointconfig;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.connection.RedisConnectionFactory;

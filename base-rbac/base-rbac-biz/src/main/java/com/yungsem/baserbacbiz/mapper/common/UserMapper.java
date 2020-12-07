@@ -1,7 +1,7 @@
 package com.yungsem.baserbacbiz.mapper.common;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.yungsem.basecommon.pojo.entity.rbac.UserEntity;
+import com.yungsem.basecommon.pojo.entity.rbac.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,14 +13,14 @@ import java.util.List;
  * @version 1.0
  * @since 2020-08-21
  */
-public interface UserMapper extends BaseMapper<UserEntity> {
+public interface UserMapper extends BaseMapper<User> {
 
     /**
      * 批量插入
      *
-     * @param userEntityList 用户
+     * @param userList 用户
      */
-    void insertBatch(List<UserEntity> userEntityList);
+    void insertBatch(List<User> userList);
 
     /**
      * 删除，物理删除

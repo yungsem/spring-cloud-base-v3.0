@@ -39,6 +39,13 @@ public class BaseUserDetailsService implements UserDetailsService {
      * @return AuthUser
      */
     private AuthUser buildAuthUser(User user) {
+        // 走到此处时就已经经过了 Client 认证，Client 认证会将 client_id 和 client_secret 作为 username 和 password
+        // 封装到 authentication 中
+        // org.springframework.security.core.userdetails.User u = (org.springframework.security.core.userdetails.User)
+        //                 SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // String clientId = u.getUsername();
+
+
         AuthUser authUser = new AuthUser(user.getUsername(), user.getPassword(),
                 AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
         authUser.setId(user.getId());

@@ -4,6 +4,7 @@ import com.yungsem.baseauth.service.BaseClientDetailsService;
 import com.yungsem.baseauth.service.endpointconfig.BaseRedisTokenStore;
 import com.yungsem.baseauth.service.endpointconfig.BaseTokenEnhancer;
 import com.yungsem.baseauth.service.endpointconfig.BaseUserAuthenticationConverter;
+import com.yungsem.baseauth.service.endpointconfig.exceptiontranslate.BaseWebResponseExceptionTranslator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -72,6 +73,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         endpointsConfigurer.tokenEnhancer(tokenEnhancer());
         // 转换 token
         endpointsConfigurer.accessTokenConverter(tokenConverter());
+        // 异常转换器
+        endpointsConfigurer.exceptionTranslator(new BaseWebResponseExceptionTranslator());
     }
 
     /**

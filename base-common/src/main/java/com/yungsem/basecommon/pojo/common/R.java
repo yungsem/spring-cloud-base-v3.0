@@ -13,9 +13,9 @@ public class R<T> {
     private String message;
     private T data;
 
-    private static final int CODE_OK = 0;
-    private static final int CODE_FAIL = 1;
-    private static final String MESSAGE_OK = "成功";
+    public static final int CODE_OK = 0;
+    public static final int CODE_FAIL = 1;
+    public static final String MESSAGE_OK = "成功";
 
     public static <T> R<T> ok(T data) {
         return build(CODE_OK, MESSAGE_OK, data);

@@ -30,13 +30,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/oauth/**", "/login").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/login", "/oauth2/**").permitAll()
                 .anyRequest().authenticated()
-                .and()
-                .formLogin().permitAll()
-        // .and().logout().invalidateHttpSession(true).deleteCookies("remember-me")
+                .and().formLogin().permitAll()
+                .and().csrf().disable()
         ;
     }
 }
